@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="media-body">
+      <h3 class="display-4">Business</h3>
+      </div>
+     <hr>
+
+{% for b in buss  %}
+<article class="media content-section">
+      <img src="{{ b.image.url }}" class="rounded-circle article-img">
+      <div class="media-body">
+            <div class="article-metadata">
+            <small class="float-right mt-3 mr-5">{{ b.location}}</small>
+            </div>
+      <h3><a class="article-title ml-3">{{ b.name }}</a></h3>
+      <br>
+      <h6 class="font-italic article-content ml-3"> {{ b.description }}</h6>
+      <hr>
+      <p class="font-italic"><a class="article-title " >Owner: {{ b.owner.username }}</a></p>
+      <p class="font-italic">Contact us at: {{ b.contact }}</p>
+
+      <a class="btn btn-outline-success mt-2 float-left" href="{{ b.link }}" >
+            Visit Us
+      </a>
+      </div>  
+       
+</article>
+
+
+{% endfor %}
+<div class="article-metadata">
+      <a class="btn btn-outline-success mt-2 float-right" href="{% url 'business-add'%}" >
+            Add Business
+            </a>
+</div>
+
+{% endblock content %}

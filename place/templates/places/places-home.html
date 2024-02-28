@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <div class="media-body">
+      <h3 class="display-4">Tourist Places</h3>
+      <a class="btn btn-outline-success mt-2 float-right" href="{% url 'places-add'%}" >
+                  Add Tourist spots!
+      </a>
+      </div>    
+     <hr>
+     <br>
+{% for b in places  %}
+<article class="media content-section">
+      <img src="{{ b.image.url }}" class="rounded-circle article-img">
+      <div class="media-body">
+            <div class="article-metadata">
+            <small class="float-right mt-3 mr-5">{{ b.location}}</small>
+            </div>
+      <h3><a class="article-title ml-3">{{ b.name }}</a></h3>
+      <br>
+      <h6 class="font-italic article-content ml-3"> {{ b.highlight }}</h6>
+      <hr>         
+</article>
+{% endfor %}
+
+<article class="media content-section">
+      
+   {% comment %} map {% endcomment %}
+      
+      <div id='map' style='width: 900px; height: 400px; margin:auto;'></div>
+            <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWRpdHlhZGhhdWwiLCJhIjoiY2wzZ3k0M2h3MTNrYTNib2Y4MWpldGJiYyJ9.qqqgsAkgcrPHo3zHv1t6Lg';
+            const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [78.0322,30.3165], // starting position [lng, lat]
+            zoom: 9 // starting zoom
+            });
+            {% for loc in places %}
+            var marker = new mapboxgl.Marker({color:'#000000'})
+                  .setLngLat([ {{loc.longitude}}, {{loc.latitude}}])
+                  .setPopup(new mapboxgl.Popup().setHTML("<h6>{{loc.name}}</h6>"))
+                  .addTo(map);
+            {% endfor %}
+            </script>
+      </div>
+</article>
+
+
+<hr>
+{% endblock content %}

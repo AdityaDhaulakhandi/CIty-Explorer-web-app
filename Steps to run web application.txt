@@ -1,0 +1,7 @@
+Steps to run the project - 
+
+1) Install Python and use pip install command to install django
+2) Open Command Prompt
+3) Open the project directory in cmd
+4) Type the following command : python manage.py runserver
+5) Copy and paste the IP address in a browser.
